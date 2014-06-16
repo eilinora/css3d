@@ -1,6 +1,9 @@
 <?php
-$ani = '12s';
+$ani = '8s';
+$easeInOut = 'cubic-bezier(0.55, 0.055, 0.675, 0.19)';
 $ease = 'cubic-bezier(0.645, 0.045, 0.355, 1)';
+$easeOut = 'cubic-bezier(0.165, 0.84, 0.44, 1)';
+$easeOutSin = 'cubic-bezier(0.47, 0, 0.745, 0.715)';
 ?>
 
 <html>
@@ -17,18 +20,18 @@ $ease = 'cubic-bezier(0.645, 0.045, 0.355, 1)';
       margin: 0 auto;
       width:100%;
       height:500px;
-      background: white;
+      background: #00aeef;
       overflow: hidden;
-      
+
     }
-    
+
     .fade {
       position: absolute;
       width: 100%;
       margin: 0 auto;
-      margin-top:350px;
-      height: 150px;
-      background: -webkit-linear-gradient(rgba(255,255,255, 0), rgba(255,255,255,255)); 
+      margin-top:400px;
+      height: 100px;
+      background: -webkit-linear-gradient(rgba(0,174,239,0), rgba(0,174,239,255));
       z-index: 100;
     }
     .view {
@@ -81,8 +84,9 @@ $ease = 'cubic-bezier(0.645, 0.045, 0.355, 1)';
       top: 0;
       left: 0;
       font-size:100px;
-      color:#00aeef;
+      color:white;
       width:1000px;
+
     }
 
     .slide6 {
@@ -99,40 +103,46 @@ $ease = 'cubic-bezier(0.645, 0.045, 0.355, 1)';
     .img {
       opacity:0;
       -webkit-animation: fadein 500ms <?= $ease ?>;
-      -webkit-animation-delay:300ms;
+      -webkit-animation-delay:100ms;
       -webkit-animation-fill-mode:forwards;
       width:500px;
     }
-    
-    <?php 
+
+    <?php
     //0
-    $stop1Per = array('5%', '10%');
+    $stop1Per = array('10%', '15%');
     $stop1Pos = '-200px';
 
     ?>
 
-    @-webkit-keyframes zoomIn {
+    @-webkit-keyframes opening {
       0% {
+        opacity: 0;
         -webkit-transform:translate3d(0px, 0px, -400px);
       }
 
-      <?= $stop1Per[0] ?> {
+      5% {
+        opacity: 1;
         -webkit-transform:translate3d(0px, 0px, <?= $stop1Pos ?>);
       }
 
-      <?= $stop1Per[1] ?> {
+      15% {
         -webkit-transform:translate3d(0px, 0px, <?= $stop1Pos ?>);
       }
 
-      60% {
+      100% {
         -webkit-transform:translate3d(0px, 0px, 8900px);
       }
+    }
 
-      85% {
+    @-webkit-keyframes resolveOut {
+      0% {
+        opacity:1;
         -webkit-transform:translate3d(0px, 0px, 8900px);
       }
 
       100% {
+        opacity:0;
         -webkit-transform:translate3d(0px, 0px, 22000px);
       }
     }
@@ -140,32 +150,31 @@ $ease = 'cubic-bezier(0.645, 0.045, 0.355, 1)';
     @-webkit-keyframes slide1 {
       0% {
         opacity:0;
-        -webkit-transform: translate3d(-220px, 0px, -400px) rotateZ(0deg); 
+        -webkit-transform: translate3d(-220px, 0px, -200px) rotateZ(0deg);
       }
 
-      <?= $stop1Per[0] ?> {
-        opacity:1;
-        -webkit-transform: translate3d(-220px, -220px, <?= $stop1Pos ?>) rotateZ(-12deg); 
-      }
       100% {
         opacity:1;
-        -webkit-transform: translate3d(-220px, -220px, <?= $stop1Pos ?>) rotateZ(-12deg); 
+        -webkit-transform: translate3d(-220px, -220px, <?= $stop1Pos ?>) rotateZ(-12deg);
       }
     }
 
     @-webkit-keyframes slide6 {
       0% {
         opacity:0;
-        -webkit-transform: translate3d(-220px, 0px, -8800px) rotateZ(0deg); 
+        -webkit-transform: translate3d(-70px, 120px, -9000px);
       }
 
-      <?= $stop2Per[0] ?> {
+      45%, 75% {
         opacity:1;
-        -webkit-transform: translate3d(-220px, -220px, -9000px) rotateZ(-12deg); 
+        height:55px;
+        -webkit-transform: translate3d(-70px, -10px, -9000px);
       }
+
       100% {
+        height:110px;
         opacity:1;
-        -webkit-transform: translate3d(-220px, -220px, -9000px) rotateZ(-12deg); 
+        -webkit-transform: translate3d(-70px, -70px, -9000px);
       }
     }
 
@@ -176,8 +185,8 @@ $ease = 'cubic-bezier(0.645, 0.045, 0.355, 1)';
     .content {
       transform-style:preserve-3d;
       -webkit-transform:translate3d(0px, 0px, -400px);
-      -webkit-animation: zoomIn <?= $ani ?> <?= $ease ?>;
-      -webkit-delay:600ms;
+      -webkit-animation: opening <?= $ani ?> <?= $easeOutSin ?> 600ms,
+                         resolveOut 10s cubic-bezier(0.215, 0.61, 0.355, 1) 4s;
       -webkit-animation-fill-mode:forwards;
     }
 
@@ -185,12 +194,30 @@ $ease = 'cubic-bezier(0.645, 0.045, 0.355, 1)';
       opacity:0;
     }
     .slide1 {
-      -webkit-animation: slide1 <?= $ani ?> <?= $ease ?>;
-      -webkit-delay:600ms;
+      -webkit-animation: slide1 500ms <?= $ease ?> 500ms;
+      -webkit-animation-fill-mode:forwards;
+
+      text-shadow: 0 1px 0 #ccc,
+               0 2px 0 #c9c9c9,
+               0 3px 0 #bbb,
+               0 4px 0 #b9b9b9,
+               0 5px 0 #aaa,
+               0 6px 1px rgba(0,0,0,.1),
+               0 0 5px rgba(0,0,0,.1),
+               0 1px 3px rgba(0,0,0,.3),
+               0 3px 5px rgba(0,0,0,.2),
+               0 5px 10px rgba(0,0,0,.25),
+               0 10px 10px rgba(0,0,0,.2),
+               0 20px 20px rgba(0,0,0,.15);
     }
-    /*.slide6 {
-      -webkit-animation: slide6 <?= $ani ?>;
-    }*/
+    .slide6 {
+      opacity:0;
+      -webkit-animation: slide6 2s <?= $easeOut ?> 9s;
+      text-align:center;
+      -webkit-animation-fill-mode:forwards;
+      overflow: hidden;
+      height:55px;
+    }
 
   </style>
 <body>
@@ -208,8 +235,8 @@ $ease = 'cubic-bezier(0.645, 0.045, 0.355, 1)';
 
         for ($i = 0; $i < $imgLen; $i++) {
           if ($i < count($imgs)) {
-            $x = rand(0,1) ? rand(-1160,-300): rand(850,1650);
-            echo "<li class='year img img-".$i."' style='-webkit-transform: translate3d(".$x."px, ".rand(-500,200) ."px, ".rand(-400, -11000)."px); '><img src='assets/images/".$imgs[$i]."' /></li>";
+            $x = rand(0,1) ? rand(-1760,-500): rand(1000,1850);
+            echo "<li class='year img img-".$i."' style='-webkit-transform: translate3d(".$x."px, ".rand(-600,200) ."px, ".rand(-200, -9000)."px); '><img src='assets/images/".$imgs[$i]."' /></li>";
           }
         }
 
@@ -218,17 +245,17 @@ $ease = 'cubic-bezier(0.645, 0.045, 0.355, 1)';
           if ($i > 15) {
             $o = (1*(30/$i))-1;
             $op = 'opacity: '.$o.';';
-          } 
+          }
 
           echo "<li class='year year-".$i."' style='-webkit-transform: translate3d(0px, 0px, -".($i*600)."px); z-index: ".(20-$i)."; ".$op."'>".(1999+$i)."</li>";
-          
+
           switch ($i) {
             case 0:
               echo "<li class='slide slide1' style='z-index: ".(20-$i).";'>MCD OPENS!</li>";
               break;
 
             case 15:
-              echo "<li class='slide slide6' style='-webkit-transform: translate3d(-70px, -70px, -".($i*600)."px); z-index: ".(20-$i)."; opacity:1; text-align:center;'>Celebrating 15 years of amazing work!<br/> Imagine what the next 15 years will bring</li>";
+              echo "<li class='slide slide6' style='-webkit-transform: translate3d(-70px, -70px, -".($i*600)."px); z-index: ".(20-$i)."; '>Celebrating 15 years of amazing work.<br/>Imagine what the next 15 years will bring.</li>";
               break;
           }
 
