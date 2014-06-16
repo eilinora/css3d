@@ -1,5 +1,6 @@
 <?php
-$ani = '15s';
+$ani = '12s';
+$ease = 'cubic-bezier(0.645, 0.045, 0.355, 1)';
 ?>
 
 <html>
@@ -10,13 +11,15 @@ $ani = '15s';
       font-family: Arial, Helvetica, san-sarif;
       font-weight: bold;
       padding:0; margin:0;
+      background: black;
     }
     .wrapper{
       margin: 0 auto;
       width:100%;
       height:500px;
-      background: black;
+      background: white;
       overflow: hidden;
+      
     }
     
     .fade {
@@ -25,7 +28,7 @@ $ani = '15s';
       margin: 0 auto;
       margin-top:350px;
       height: 150px;
-      background: -webkit-linear-gradient(rgba(0,0,0, 0), rgba(0,0,0,255)); 
+      background: -webkit-linear-gradient(rgba(255,255,255, 0), rgba(255,255,255,255)); 
       z-index: 100;
     }
     .view {
@@ -45,7 +48,7 @@ $ani = '15s';
     }
     .year {
       font-size: 300px;
-      color:white;
+      color:#333;
 
       text-align: center;
       list-style: none;
@@ -81,27 +84,30 @@ $ani = '15s';
       color:#00aeef;
       width:1000px;
     }
+
+    .slide6 {
+      font-size:50px;
+      line-height: 1em;
+    }
+
+    img {
+      width:100%;
+      height:auto;
+      display: block;
+    }
+
+    .img {
+      opacity:0;
+      -webkit-animation: fadein 500ms <?= $ease ?>;
+      -webkit-animation-delay:300ms;
+      -webkit-animation-fill-mode:forwards;
+      width:500px;
+    }
     
     <?php 
     //0
-    $stop1Per = array('5%', '15%');
+    $stop1Per = array('5%', '10%');
     $stop1Pos = '-200px';
-    //3
-    $stop2Per = array('25%', '30%');
-    $stop2Pos = '1700px';
-    //6
-    $stop3Per = array('40%', '45%');
-    $stop3Pos = '4000px';
-    //10
-    $stop4Per = array('60%', '65%');
-    $stop4Pos = '6400px';
-    //13
-    $stop5Per = array('80%', '85%');
-    $stop5Pos = '7600px';
-    //15
-    $stop6Per = array('80%', '88%');
-    $stop6Pos = '8800px';
-
 
     ?>
 
@@ -110,57 +116,24 @@ $ani = '15s';
         -webkit-transform:translate3d(0px, 0px, -400px);
       }
 
-      5% {
-        -webkit-transform:translate3d(0px, 0px, -200px);
-      }
-
-      10% {
-        -webkit-transform:translate3d(0px, 0px, -200px);
-      }
-       
-       /*
-      //slide1
       <?= $stop1Per[0] ?> {
         -webkit-transform:translate3d(0px, 0px, <?= $stop1Pos ?>);
       }
+
       <?= $stop1Per[1] ?> {
         -webkit-transform:translate3d(0px, 0px, <?= $stop1Pos ?>);
       }
 
-      //slide2
-      <?= $stop2Per[0] ?> {
-        -webkit-transform:translate3d(0px, 0px, <?= $stop2Pos ?>);
-      }
-      <?= $stop2Per[1] ?> {
-        -webkit-transform:translate3d(0px, 0px, <?= $stop2Pos ?>);
+      60% {
+        -webkit-transform:translate3d(0px, 0px, 8900px);
       }
 
-      //slide3
-      <?= $stop3Per[0] ?> {
-        -webkit-transform:translate3d(0px, 0px, <?= $stop3Pos ?>);
+      85% {
+        -webkit-transform:translate3d(0px, 0px, 8900px);
       }
-      <?= $stop3Per[1] ?> {
-        -webkit-transform:translate3d(0px, 0px, <?= $stop3Pos ?>);
-      }
-
-      //slide4
-      <?= $stop4Per[0] ?> {
-        -webkit-transform:translate3d(0px, 0px, <?= $stop4Pos ?>);
-      }
-      <?= $stop4Per[1] ?> {
-        -webkit-transform:translate3d(0px, 0px, <?= $stop4Pos ?>);
-      }
-
-      //slide5
-      <?= $stop5Per[0] ?> {
-        -webkit-transform:translate3d(0px, 0px, <?= $stop5Pos ?>);
-      }
-      <?= $stop5Per[1] ?> {
-        -webkit-transform:translate3d(0px, 0px, <?= $stop5Pos ?>);
-      }*/
 
       100% {
-        -webkit-transform:translate3d(0px, 0px, 8900px);
+        -webkit-transform:translate3d(0px, 0px, 22000px);
       }
     }
 
@@ -180,22 +153,6 @@ $ani = '15s';
       }
     }
 
-    @-webkit-keyframes slide2 {
-      0% {
-        opacity:0;
-        -webkit-transform: translate3d(-220px, 0px, -1800px) rotateZ(0deg); 
-      }
-
-      <?= $stop2Per[0] ?> {
-        opacity:1;
-        -webkit-transform: translate3d(-220px, -220px, -1800px) rotateZ(-12deg); 
-      }
-      100% {
-        opacity:1;
-        -webkit-transform: translate3d(-220px, -220px, -1800px) rotateZ(-12deg); 
-      }
-    }
-
     @-webkit-keyframes slide6 {
       0% {
         opacity:0;
@@ -212,36 +169,28 @@ $ani = '15s';
       }
     }
 
+    @-webkit-keyframes fadein {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
     .content {
       transform-style:preserve-3d;
       -webkit-transform:translate3d(0px, 0px, -400px);
-      -webkit-animation: zoomIn <?= $ani ?> cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      -webkit-animation: zoomIn <?= $ani ?> <?= $ease ?>;
+      -webkit-delay:600ms;
       -webkit-animation-fill-mode:forwards;
-      
     }
 
     .slide {
       opacity:0;
-      -webkit-animation-fill-mode:forwards;
     }
     .slide1 {
-      -webkit-animation: slide1 <?= $ani ?>;
+      -webkit-animation: slide1 <?= $ani ?> <?= $ease ?>;
+      -webkit-delay:600ms;
     }
-    .slide2 {
-      -webkit-animation: slide2 <?= $ani ?>;
-    }
-    .slide3 {
-      -webkit-animation: slide3 <?= $ani ?>;
-    }
-    .slide4 {
-      -webkit-animation: slide4 <?= $ani ?>;
-    }
-    .slide5 {
-      -webkit-animation: slide5 <?= $ani ?>;
-    }
-    .slide6 {
+    /*.slide6 {
       -webkit-animation: slide6 <?= $ani ?>;
-    }
+    }*/
 
   </style>
 <body>
@@ -251,37 +200,38 @@ $ani = '15s';
       <div class="content">
       <ul>
       <?php
+      $imgs = array('daily-candy-beauty.jpg', 'daily-candy-home.jpg', 'daily-candy-beauty.jpg', 'etrade-best-investing-experience.jpg', 'etrade-powerful-tools.jpg', 'macmillan-mobile-site.png', 'macmillan-book-smart-and-loves-travel.jpg', 'macmillan-publish-new-chapter-online.jpg', 'macmillan-responsive-site.jpg', 'mcd_home_mobile_320.jpg', 'mskcc-site-redesign.jpg', 'pulse-conference.jpg', 'pulse-debit-dashboard.jpg', 'sesame-muppets.jpg', 'tiffany-collection-crystal.jpg', 'tiffany-collection-rings.jpg', 'tiffany-collection-rings.jpg', 'tiffany-details-considered.jpg', 'samsung-redesign-and-reborn.jpg', 'samsung-pleased-to-meet-ux.jpg', 'samsung-inspiration-innovation-connected-living.png', 'samsung-beauty-skin-deep.png', 'samsung-ces-2014.jpg', 'samsung-black-friday-deals.png', 'nautica-shop-experience.jpg', 'nautica-360-blog.jpg', 'genworth-better-decision-making.jpg', 'genworth-value-at-click.jpg', 'drug-free-fighting-the-good-fight.jpg', 'drug-free-parenting-toolkit.jpg', 'drug-free-memorial.jpg', 'drug-free-dmx-stories.jpg', 'discover-everyday-giveaway.jpg',
+
+        'daily-candy-beauty.jpg', 'daily-candy-home.jpg', 'daily-candy-beauty.jpg', 'etrade-best-investing-experience.jpg', 'etrade-powerful-tools.jpg', 'macmillan-mobile-site.png', 'macmillan-book-smart-and-loves-travel.jpg', 'macmillan-publish-new-chapter-online.jpg', 'macmillan-responsive-site.jpg', 'mcd_home_mobile_320.jpg', 'mskcc-site-redesign.jpg', 'pulse-conference.jpg', 'pulse-debit-dashboard.jpg', 'sesame-muppets.jpg', 'tiffany-collection-crystal.jpg', 'tiffany-collection-rings.jpg', 'tiffany-collection-rings.jpg', 'tiffany-details-considered.jpg', 'samsung-redesign-and-reborn.jpg', 'samsung-pleased-to-meet-ux.jpg', 'samsung-inspiration-innovation-connected-living.png', 'samsung-beauty-skin-deep.png', 'samsung-ces-2014.jpg', 'samsung-black-friday-deals.png', 'nautica-shop-experience.jpg', 'nautica-360-blog.jpg', 'genworth-better-decision-making.jpg', 'genworth-value-at-click.jpg', 'drug-free-fighting-the-good-fight.jpg', 'drug-free-parenting-toolkit.jpg', 'drug-free-memorial.jpg', 'drug-free-dmx-stories.jpg', 'discover-everyday-giveaway.jpg');
+
+        $imgLen = count($imgs);
+
+        for ($i = 0; $i < $imgLen; $i++) {
+          if ($i < count($imgs)) {
+            $x = rand(0,1) ? rand(-1160,-300): rand(850,1650);
+            echo "<li class='year img img-".$i."' style='-webkit-transform: translate3d(".$x."px, ".rand(-500,200) ."px, ".rand(-400, -11000)."px); '><img src='assets/images/".$imgs[$i]."' /></li>";
+          }
+        }
+
         for ($i = 0; $i <= 30; $i++) {
-          echo "<li class='year year-".$i."' style='-webkit-transform: translate3d(0px, 0px, -".($i*600)."px); z-index: ".(20-$i).";'>".(1999+$i).'</li>';
+          $op = '';
+          if ($i > 15) {
+            $o = (1*(30/$i))-1;
+            $op = 'opacity: '.$o.';';
+          } 
+
+          echo "<li class='year year-".$i."' style='-webkit-transform: translate3d(0px, 0px, -".($i*600)."px); z-index: ".(20-$i)."; ".$op."'>".(1999+$i)."</li>";
+          
           switch ($i) {
             case 0:
-              echo "<li class='slide slide1' style='z-index: ".(20-$i).";'>MCD OPENS!</li>'";
+              echo "<li class='slide slide1' style='z-index: ".(20-$i).";'>MCD OPENS!</li>";
               break;
-
-            /*case 3:
-              echo "<li class='slide slide2' style='z-index: ".(20-$i).";'>MCD lands Discover!</li>'";
-              break;
-
-            case 6:
-              echo "<li class='slide slide3' style='z-index: ".(20-$i).";'>Moves to Chelsea Offices</li>'";
-              break;
-
-
-            case 11:
-              echo "<li class='slide slide4' style='z-index: ".(20-$i).";'>Expands Offices</li>'";
-              break;
-
-
-            case 13:
-              echo "<li class='slide slide5' style='z-index: ".(20-$i).";'>MCD Gets a Chicago Address</li>'";
-              break;*/
 
             case 15:
-              echo "<li class='slide slide6' style='z-index: ".(20-$i).";'>Celebrates 15 years and still going strong! Imagine what the next 15 years will bring</li>'";
+              echo "<li class='slide slide6' style='-webkit-transform: translate3d(-70px, -70px, -".($i*600)."px); z-index: ".(20-$i)."; opacity:1; text-align:center;'>Celebrating 15 years of amazing work!<br/> Imagine what the next 15 years will bring</li>";
               break;
-
-
           }
+
         }
       ?>
       </ul>
