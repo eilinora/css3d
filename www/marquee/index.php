@@ -1,7 +1,8 @@
+<!DOCTYPE html>
 <html>
   <title>MCD Marquee</title>
 
-  <style src="assets/css/main.css" />
+  <link rel="stylesheet" type="text/css" href="assets/css/main.css">
 <body>
   <div class="wrapper">
     <div class="fade"></div>
@@ -18,7 +19,7 @@
         for ($i = 0; $i < $imgLen; $i++) {
           if ($i < count($imgs)) {
             $x = rand(0,1) ? rand(-1760,-500): rand(1000,1850);
-            echo "<li class='year img img-".$i."' style='-webkit-transform: translate3d(".$x."px, ".rand(-600,200) ."px, ".rand(-200, -9000)."px); '><img src='assets/images/".$imgs[$i]."' /></li>";
+            echo "<li class='year img img-".$i."' style='-webkit-transform: translate3d(".$x."px, ".rand(-600,200) ."px, ".rand(-200, -9000)."px); '><img src='assets/images/".$imgs[$i]."' /></li>\n";
           }
         }
 
@@ -29,15 +30,15 @@
             $op = 'opacity: '.$o.';';
           }
 
-          echo "<li class='year year-".$i."' style='-webkit-transform: translate3d(0px, 0px, -".($i*600)."px); z-index: ".(20-$i)."; ".$op."'>".(1999+$i)."</li>";
+          echo "<li class='year year-".$i."' style='-webkit-transform: translate3d(0px, 0px, -".($i*600)."px); z-index: ".(20-$i)."; ".$op."'>".(1999+$i)."</li>\n";
 
           switch ($i) {
             case 0:
-              echo "<li class='slide slide1' style='z-index: ".(20-$i).";'>MCD OPENS!</li>";
+              echo "<li class='slide slide1' style='z-index: ".(20-$i).";'>MCD OPENS!</li>\n";
               break;
 
             case 15:
-              echo "<li class='slide slide6' style='-webkit-transform: translate3d(-70px, -70px, -".($i*600)."px); z-index: ".(20-$i)."; '>Celebrating 15 years of amazing work.<br/>Imagine what the next 15 years will bring.</li>";
+              echo "<li class='slide slide6' style='-webkit-transform: translate3d(-70px, -70px, -".($i*600)."px); z-index: ".(20-$i)."; '>Celebrating 15 years of amazing work.<br/>Imagine what the next 15 years will bring.</li>\n";
               break;
           }
 
