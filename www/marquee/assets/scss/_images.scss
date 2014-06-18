@@ -1,0 +1,18 @@
+
+.img {
+  opacity:0;
+  -webkit-animation: fadein 500ms $ease;
+  -webkit-animation-delay:100ms;
+  -webkit-animation-fill-mode:forwards;
+  width:500px;
+}
+img {
+  width:100%;
+  height:auto;
+  display: block;
+}
+
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}

@@ -1,0 +1,52 @@
+@import 'base';
+
+
+$ani: 7.5s;
+$easeInOut: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+$ease: cubic-bezier(0.645, 0.045, 0.355, 1);
+$easeOut: cubic-bezier(0.165, 0.84, 0.44, 1);
+$easeOutSin: cubic-bezier(0.47, 0, 0.745, 0.715);
+
+$stop1Pos: -200px;
+
+@-webkit-keyframes opening {
+  0% {
+    opacity: 0;
+    -webkit-transform:translate3d(0px, 0px, -400px);
+  }
+
+  5% {
+    opacity: 1;
+    -webkit-transform:translate3d(0px, 0px, $stop1Pos);
+  }
+
+  15% {
+    -webkit-transform:translate3d(0px, 0px, $stop1Pos);
+  }
+
+  100% {
+    -webkit-transform:translate3d(0px, 0px, 8900px);
+  }
+}
+
+@-webkit-keyframes resolveOut {
+  0% {
+    opacity:1;
+    -webkit-transform:translate3d(0px, 0px, 8900px);
+  }
+
+  100% {
+    opacity:0;
+    -webkit-transform:translate3d(0px, 0px, 22000px);
+  }
+}
+
+
+
+.content {
+  transform-style:preserve-3d;
+  -webkit-transform:translate3d(0px, 0px, -400px);
+  -webkit-animation: opening $ani $easeOutSin 600ms,
+                     resolveOut 10s cubic-bezier(0.215, 0.61, 0.355, 1) 4s;
+  -webkit-animation-fill-mode:forwards;
+}
